@@ -23,6 +23,7 @@ function draw() {
   ellipse(coinX, coinY, 20)
   ellipse(mouseX, mouseY, 20)
   text(`Time remaining: ${time}`, 20, 40)
+  handleTime()
 }
 
 function handleCollision() {
@@ -30,5 +31,9 @@ function handleCollision() {
 }
 
 function handleTime() {
-  // We'll write code to handle the time.
+  if(time <= 0) {
+    gameIsOver = true
+    return
+  }
+  time -= 1
 }
