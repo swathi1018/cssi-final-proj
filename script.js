@@ -15,6 +15,7 @@ function setup() {
   coinX = random(width)
   coinY = random(height)
   time = 1000
+  score = 0
   gameIsOver = false
 }
 
@@ -23,16 +24,27 @@ function draw() {
   ellipse(coinX, coinY, 20)
   ellipse(mouseX, mouseY, 20)
   text(`Time remaining: ${time}`, 20, 40)
+  text(`Score: ${score}`, 20, 60)
+  handleCollision()
   handleTime()
 }
 
 function handleCollision() {
-  // We'll write code for what happens if your character hits a coin.
+  if(gameIsOver) return;
+  
+  hit = collideCircleCircle(coinX, coinY, 20, mouseX, mouseY, 20)
+  
+  if(hit) {
+    coinX = random(width)
+    coinY = random(height)
+    score += 1
+  }
 }
 
 function handleTime() {
   if(time <= 0) {
     gameIsOver = true
+    text(`Game over`, 165, 200)
     return
   }
   time -= 1
