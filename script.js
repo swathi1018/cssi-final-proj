@@ -63,6 +63,9 @@ function handleCollision() {
   
   if(hit3 && !gameIsOver){
     score +=10
+    coinX3 = random(width);
+    coinY3 = random(height);
+    specialCoinBool = false
   }
 }
 
