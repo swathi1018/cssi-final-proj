@@ -26,6 +26,7 @@ function draw() {
   text(`Time remaining: ${time}`, 20, 40);
   text(`Score: ${score}`,20,60)
   handleCollision()
+  handleTime()
 }
 
 function handleCollision() {
@@ -33,7 +34,7 @@ function handleCollision() {
   hit = collideCircleCircle(mouseX, mouseY, 20, coinX, coinY, 20)
   //text(`Hit: ${hit}`, 20, 80)
   
-  if(hit){
+  if(hit && !gameIsOver){
     score +=1
     coinX = random(width);
     coinY = random(height);
@@ -42,8 +43,9 @@ function handleCollision() {
 
 function handleTime() {
   // We'll write code to handle the time.
-  if(time >=0){
+  if(time <=0 || gameIsOver){
     gameIsOver = true
+    text('GAME OVER!', width/2 -50, height/2 - 50)
   }
   else{
     time -=1
