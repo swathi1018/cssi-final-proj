@@ -4,7 +4,7 @@
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
           strokeWeight, keyCode, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
 
-let brushHue, backgroundColor, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, score, time, gameIsOver, hit1, hit2, hit3;
+let brushHue, backgroundColor, specialCoinBool, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, score, time, gameIsOver, hit1, hit2, hit3;
 
 function setup() {
   // Canvas & color settings
@@ -21,6 +21,7 @@ function setup() {
   time = 1000;
   gameIsOver = false;
   score = 0
+  specialCoinDuration = 50
 }
 
 function draw() {
@@ -35,7 +36,10 @@ function draw() {
   text(`Score: ${score}`,20,60)
   handleCollision()
   handleTime()
-  //specialCoin()
+  if(specialCoinBool){
+    specialCoin()
+  }
+  
 }
 
 function handleCollision() {
@@ -69,11 +73,16 @@ function handleTime() {
     gameIsOver = true
     text('GAME OVER!', width/2 -50, height/2 - 50)
   }
-  else if(time%100 == 0){
-    specialCoin
+  else if(time%100 != 0){
+    specialCoin()
+    time -=1
+    coinX3 = random(width);
+    coinY3 = random(height);
+    specialCoinBool = true
   }
   else{
     time -=1
+    //specialCoinBool = false
   }
 }
 
@@ -84,10 +93,6 @@ function keyPressed() {
 }
 
 function specialCoin(){
-    coinX3 = random(width);
-    coinY3 = random(height);
-    while(time%20 != 0){
-      fill(145,74,94)
-      ellipse(coinX3, coinY3, 20);
-    }
+    fill(145,74,94)
+    ellipse(coinX3, coinY3, 20);
 }
