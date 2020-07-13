@@ -4,7 +4,7 @@
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
           strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
 
-let brushHue, backgroundColor, coinX, coinY, score, time, gameIsOver, hit;
+let brushHue, backgroundColor, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, score, time, gameIsOver, hit1, hit2, hit3;
 
 function setup() {
   // Canvas & color settings
@@ -12,8 +12,12 @@ function setup() {
   colorMode(HSB, 360, 100, 100);
   brushHue = 0;
   backgroundColor = 95;
-  coinX = random(width);
-  coinY = random(height);
+  coinX1 = random(width);
+  coinY1 = random(height);
+  coinX2 = random(width);
+  coinY2 = random(height);
+  coinX3 = random(width);
+  coinY3 = random(height);
   time = 1000;
   gameIsOver = false;
   score = 0
@@ -21,8 +25,13 @@ function setup() {
 
 function draw() {
   background(backgroundColor);
-  ellipse(coinX, coinY, 20);
+  fill(47,74,94)
+  ellipse(coinX1, coinY1, 20);
+  ellipse(coinX2, coinY2, 20);
+  ellipse(coinX3, coinY3, 20);
+  fill(1,74,94)
   ellipse(mouseX, mouseY, 20);
+  fill(0,0,0)
   text(`Time remaining: ${time}`, 20, 40);
   text(`Score: ${score}`,20,60)
   handleCollision()
@@ -31,13 +40,26 @@ function draw() {
 
 function handleCollision() {
   // We'll write code for what happens if your character hits a coin.
-  hit = collideCircleCircle(mouseX, mouseY, 20, coinX, coinY, 20)
-  //text(`Hit: ${hit}`, 20, 80)
+  hit1 = collideCircleCircle(mouseX, mouseY, 20, coinX1, coinY1, 20)
+  hit2 = collideCircleCircle(mouseX, mouseY, 20, coinX2, coinY2, 20)
+  hit3 = collideCircleCircle(mouseX, mouseY, 20, coinX3, coinY3, 20)
   
-  if(hit && !gameIsOver){
+  if(hit1 && !gameIsOver){
     score +=1
-    coinX = random(width);
-    coinY = random(height);
+    coinX1 = random(width);
+    coinY1 = random(height);
+  }
+  
+  if(hit2 && !gameIsOver){
+    score +=2
+    coinX2 = random(width);
+    coinY2 = random(height);
+  }
+  
+  if(hit3 && !gameIsOver){
+    score +=3
+    coinX3 = random(width);
+    coinY3 = random(height);
   }
 }
 
