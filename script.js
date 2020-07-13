@@ -2,25 +2,13 @@
 // Add to this list as you consult the p5.js documentation for other functions.
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
-          strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
+          strokeWeight, keyCode, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
 
 let brushHue, backgroundColor, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, score, time, gameIsOver, hit1, hit2, hit3;
 
 function setup() {
   // Canvas & color settings
-  createCanvas(400, 400);
-  colorMode(HSB, 360, 100, 100);
-  brushHue = 0;
-  backgroundColor = 95;
-  coinX1 = random(width);
-  coinY1 = random(height);
-  coinX2 = random(width);
-  coinY2 = random(height);
-  coinX3 = random(width);
-  coinY3 = random(height);
-  time = 1000;
-  gameIsOver = false;
-  score = 0
+  reset()
 }
 
 function draw() {
@@ -28,7 +16,6 @@ function draw() {
   fill(47,74,94)
   ellipse(coinX1, coinY1, 20);
   ellipse(coinX2, coinY2, 20);
-  ellipse(coinX3, coinY3, 20);
   fill(1,74,94)
   ellipse(mouseX, mouseY, 20);
   fill(0,0,0)
@@ -36,6 +23,8 @@ function draw() {
   text(`Score: ${score}`,20,60)
   handleCollision()
   handleTime()
+  while(time)
+  specialCircle()
 }
 
 function handleCollision() {
@@ -51,7 +40,7 @@ function handleCollision() {
   }
   
   if(hit2 && !gameIsOver){
-    score +=2
+    score +=1
     coinX2 = random(width);
     coinY2 = random(height);
   }
@@ -72,4 +61,33 @@ function handleTime() {
   else{
     time -=1
   }
+}
+
+function reset(){
+  createCanvas(400, 400);
+  colorMode(HSB, 360, 100, 100);
+  brushHue = 0;
+  backgroundColor = 95;
+  coinX1 = random(width);
+  coinY1 = random(height);
+  coinX2 = random(width);
+  coinY2 = random(height);
+  coinX3 = random(width);
+  coinY3 = random(height);
+  time = 1000;
+  gameIsOver = false;
+  score = 0
+}
+
+function keyPressed() {
+  if (keyCode === 82) {
+    reset()
+  }
+}
+
+function specialCircle(){
+    coinX3 = random(width);
+    coinY3 = random(height);
+    fill(145,74,94)
+    ellipse(coinX3, coinY3, 20);
 }
