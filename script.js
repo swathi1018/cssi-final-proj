@@ -8,7 +8,19 @@ let brushHue, backgroundColor, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, s
 
 function setup() {
   // Canvas & color settings
-  reset()
+  createCanvas(400, 400);
+  colorMode(HSB, 360, 100, 100);
+  brushHue = 0;
+  backgroundColor = 95;
+  coinX1 = random(width);
+  coinY1 = random(height);
+  coinX2 = random(width);
+  coinY2 = random(height);
+  coinX3 = random(width);
+  coinY3 = random(height);
+  time = 1000;
+  gameIsOver = false;
+  score = 0
 }
 
 function draw() {
@@ -62,25 +74,9 @@ function handleTime() {
   }
 }
 
-function reset(){
-  createCanvas(400, 400);
-  colorMode(HSB, 360, 100, 100);
-  brushHue = 0;
-  backgroundColor = 95;
-  coinX1 = random(width);
-  coinY1 = random(height);
-  coinX2 = random(width);
-  coinY2 = random(height);
-  coinX3 = random(width);
-  coinY3 = random(height);
-  time = 1000;
-  gameIsOver = false;
-  score = 0
-}
-
 function keyPressed() {
   if (keyCode === 82) {
-    reset()
+    setup()
   }
 }
 
