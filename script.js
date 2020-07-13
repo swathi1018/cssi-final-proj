@@ -2,9 +2,9 @@
 // Add to this list as you consult the p5.js documentation for other functions.
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
-          strokeWeight, keyCode, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
+          strokeWeight, collideRectCircle, keyCode, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
 
-let brushHue, collideRectCircle, backgroundColor, specialTimeDuration, specialTimeBool, specialCoinBool, specialCoinDuration, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4, score, time, gameIsOver, hit1, hit2, hit3, hit4;
+let brushHue, backgroundColor, specialTimeDuration, specialTimeBool, specialCoinBool, specialCoinDuration, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4, score, time, gameIsOver, hit1, hit2, hit3, hit4;
 
 function setup() {
   // Canvas & color settings
@@ -37,6 +37,8 @@ function draw() {
   fill(0,0,0)
   text(`Time remaining: ${time}`, 20, 40);
   text(`Score: ${score}`,20,60)
+  text('Collect the coins! Gold = 1 pt and Green = 10 pt', 20, 360)
+  text('Blue squares = +100 time. Press "r" to reset. ', 20, 380)
   handleCollision()
   handleTime()
   if(specialCoinBool && specialCoinDuration > 0){
