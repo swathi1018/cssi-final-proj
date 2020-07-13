@@ -4,7 +4,7 @@
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
           strokeWeight, keyCode, line, mouseIsPressed, windowWidth, windowHeight, noStroke */
 
-let brushHue, backgroundColor, specialCoinBool, specialCoinDuration, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, score, time, gameIsOver, hit1, hit2, hit3;
+let brushHue, collideRectCircle, backgroundColor, specialTimeDuration, specialTimeBool, specialCoinBool, specialCoinDuration, coinX1, coinY1, coinX2, coinY2, coinX3, coinY3, coinX4, coinY4, score, time, gameIsOver, hit1, hit2, hit3, hit4;
 
 function setup() {
   // Canvas & color settings
@@ -18,10 +18,13 @@ function setup() {
   coinY2 = random(height);
   coinX3 = random(width);
   coinY3 = random(height);
+  coinX4 = random(width);
+  coinY4 = random(height);
   time = 1000;
   gameIsOver = false;
   score = 0
   specialCoinDuration = 0
+  specialTimeDuration = 0
 }
 
 function draw() {
@@ -41,6 +44,11 @@ function draw() {
     specialCoinDuration--
   }
   
+  if(specialTimeBool && specialTimeDuration > 0){
+    specialTimeCoin()
+    specialTimeDuration--
+  }
+  
 }
 
 function handleCollision() {
@@ -48,6 +56,7 @@ function handleCollision() {
   hit1 = collideCircleCircle(mouseX, mouseY, 20, coinX1, coinY1, 20)
   hit2 = collideCircleCircle(mouseX, mouseY, 20, coinX2, coinY2, 20)
   hit3 = collideCircleCircle(mouseX, mouseY, 20, coinX3, coinY3, 20)
+  hit4 = collideRectCircle(mouseX, mouseY, 20, 20, coinX4, coinY4, 20)
   
   if(hit1 && !gameIsOver){
     score +=1
@@ -62,10 +71,17 @@ function handleCollision() {
   }
   
   if(hit3 && !gameIsOver){
-    score +=10
+    score += 10
     coinX3 = random(width);
     coinY3 = random(height);
     specialCoinBool = false
+  }
+  
+  if(hit4 && !gameIsOver){
+    time += 100
+    coinX4 = random(width);
+    coinY4 = random(height);
+    specialTimeBool = false
   }
 }
 
@@ -82,9 +98,16 @@ function handleTime() {
     specialCoinDuration = 50
     specialCoinBool = true
   }
+  
+  else if(time%250 == 0){
+    time -=1
+    coinX4 = random(width);
+    coinY4 = random(height);
+    specialTimeDuration = 25
+    specialTimeBool = true
+  }
   else{
     time -=1
-    //specialCoinBool = false
   }
 }
 
@@ -97,4 +120,9 @@ function keyPressed() {
 function specialGreenCoin(){
     fill(145,74,94)
     ellipse(coinX3, coinY3, 20);
+}
+
+function specialTimeCoin(){
+    fill(260,74,94)
+    rect(coinX4, coinY4, 20);
 }
