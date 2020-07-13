@@ -23,8 +23,9 @@ function draw() {
   text(`Score: ${score}`,20,60)
   handleCollision()
   handleTime()
-  while(time)
-  specialCircle()
+  while(time%20 != 0){
+    specialCircle()
+  }
 }
 
 function handleCollision() {
