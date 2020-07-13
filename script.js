@@ -35,7 +35,7 @@ function draw() {
   text(`Score: ${score}`,20,60)
   handleCollision()
   handleTime()
-  
+  //specialCoin()
 }
 
 function handleCollision() {
@@ -69,6 +69,9 @@ function handleTime() {
     gameIsOver = true
     text('GAME OVER!', width/2 -50, height/2 - 50)
   }
+  else if(time%100 == 0){
+    specialCoin
+  }
   else{
     time -=1
   }
@@ -80,9 +83,11 @@ function keyPressed() {
   }
 }
 
-function specialCircle(){
+function specialCoin(){
     coinX3 = random(width);
     coinY3 = random(height);
-    fill(145,74,94)
-    ellipse(coinX3, coinY3, 20);
+    while(time%20 != 0){
+      fill(145,74,94)
+      ellipse(coinX3, coinY3, 20);
+    }
 }
