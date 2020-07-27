@@ -5,7 +5,7 @@
           strokeWeight, collideRectCircle, keyCode, mouseX, mouseY, line, mouseIsPressed, 
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown*/  
 
-let playerImage, player1, vel, score;
+let playerImage, player1, vel, score, newPlatformPo;
 let platforms = [];
 
 const numPlatforms = 10;
@@ -19,10 +19,10 @@ function setup() {
   vel = 2
   score = 0
   
-  for (let i = 0; i < numPlatforms; i++)
+  /*for (let i = 0; i < numPlatforms; i++)
     {
       platforms.push(new Platform());
-    }  
+    }  */
 }
 
 function draw() {
@@ -88,13 +88,22 @@ class Player{
   }
 
 class Platform {
-  constructor() {
-    this.x = random(width);
-    this.y = random(height/4);
+  constructor(y) {
+    this.x = random(50,width-50);
+    this.y = y
     this.width = 50;  
     this.height = 5;
     this.speed = 2;
+    this.spacing = height / numPlatforms
 }
+  
+  setUp(){
+    for (let i = 0; i < numPlatforms; i++)
+    {
+      platforms.push(new Platform());
+    }  
+    
+  }
   
   show()
   {
@@ -109,6 +118,8 @@ class Platform {
   
 }
 
+
+
 function keyDown() {
   
   if (keyIsDown(LEFT_ARROW)) {
@@ -118,7 +129,6 @@ function keyDown() {
     player1.x += 2;
   }
 }
-
 
 function displayScore() {
   fill(0);
