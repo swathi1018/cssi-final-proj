@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars, starImage
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars, starImage, gameOver
 let platforms = [];
 
 const numPlatforms = 10, numStars = 50
@@ -27,6 +27,7 @@ function setup() {
   spacing = height / numPlatforms
   yMovement = 2
   startGame = false
+  gameOver = false
   for (let i = 0; i < numStars; i++) {
     stars.push(new Star());
   }
@@ -44,33 +45,34 @@ function setup() {
 }
 
 function draw() {
+  
  if(startGame){
-   background(230,70,50);
-   for (let j = 0; j < stars.length; j++) {
-    stars[j].draw()
-  }
-  if (frameCount % 10 == 0){
-     score++
-  }
+   background(230,70,50)
+   keyDown()
+   
+   for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
+   
+  if (frameCount % 10 == 0){ score++ } //increases score
   
-  keyDown();
+  keyDown()
   displayScore()
+   
+   
   player1.draw()
-  player1.update();
-  
-  
-     
+  player1.update()
   drawPlatforms()
-  
-  
- /* for (let i = 0; i < platforms.length; i++)
-    {
-      platforms[i].show();
-      platforms[i].update();
-    } */
-  
- // checkCollision();
+  checkCollision()
 }
+
+  if(gameOver){
+  textStyle(BOLD);
+  fill(100);
+  textSize(40);
+  textFont('Georgia');
+  text('GAME OVER', 65, 300)
+  textSize(20);
+  text(`Score: ${score}`, 120, 330)
+  }
 }
 
 
