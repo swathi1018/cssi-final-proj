@@ -6,26 +6,28 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars;
 let platforms = [];
 
 const numPlatforms = 10;
 
+function preload(){
+  playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
+}
+
 function setup() {
-  // Canvas & color settings
   createCanvas(400, 600);
   colorMode(HSB, 360, 100, 100);
-  playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
+  background(230,70,50);
   player1 = new Player()
   vel = 2
   score = 0
   spacing = height / numPlatforms
   yMovement = 2
   startGame = false
-  background(230,70,80);
-  fill(100)
+  image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
-  fill(0);
+  fill(100);
   textSize(40);
   textFont('Georgia');
   text('Doodle Jump', 65, 300)
@@ -40,7 +42,7 @@ function draw() {
   }
   
   keyDown();
-  background(230,70,80);
+  background(230,70,50);
   displayScore()
   player1.draw()
   player1.update();
@@ -170,4 +172,11 @@ function drawPlatforms(){
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
   }
   }
+
+class Star{
+  constructor{
+    
+  }
+  
+}
   
