@@ -3,7 +3,7 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
           strokeWeight, collideRectCircle, keyCode, mouseX, mouseY, line, mouseIsPressed, 
-          windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown,
+          windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
 let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame;
@@ -22,9 +22,19 @@ function setup() {
   spacing = height / numPlatforms
   yMovement = 2
   startGame = false
+  background(230,70,80);
+  fill(100)
+  textStyle(BOLD);
+  fill(0);
+  textSize(40);
+  textFont('Georgia');
+  text('Doodle Jump', 65, 300)
+  textSize(20);
+  text('Press "s" to play.', 120, 330)
 }
 
 function draw() {
+ if(startGame){
   if (frameCount % 10 == 0){
      score++
   }
@@ -36,17 +46,18 @@ function draw() {
   player1.update();
   
   
-      setUpPlatforms()
-      drawPlatforms()
+     // setUpPlatforms()
+      //drawPlatforms()
   
   
-  for (let i = 0; i < platforms.length; i++)
+ /* for (let i = 0; i < platforms.length; i++)
     {
       platforms[i].show();
       platforms[i].update();
-    }
+    } */
   
-  checkCollision();
+ // checkCollision();
+}
 }
 
 
@@ -129,15 +140,13 @@ function keyDown() {
 function keyPressed() {
   
   if (keyCode === 83) {
-    gameOver = 
-  }
-  else if (keyIsDown(RIGHT_ARROW)) {
-    player1.x += 2;
+    startGame = true
   }
 }
 
 function displayScore() {
   fill(0);
+  textSize(20);
   text(`Score: ${score}`, 10, 20);
 }
 
@@ -160,6 +169,5 @@ function drawPlatforms(){
     newPlatform = new Platform(0)
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
   }
-    
   }
   
