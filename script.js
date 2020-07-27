@@ -3,9 +3,10 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
           strokeWeight, collideRectCircle, keyCode, mouseX, mouseY, line, mouseIsPressed, 
-          windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown*/  
+          windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown,
+          noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPo;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform;
 let platforms = [];
 
 const numPlatforms = 10;
@@ -18,6 +19,7 @@ function setup() {
   player1 = new Player()
   vel = 2
   score = 0
+ spacing = height / numPlatforms
   
   /*for (let i = 0; i < numPlatforms; i++)
     {
@@ -47,6 +49,8 @@ function draw() {
       platforms[i].show();
       platforms[i].update();
     }
+  
+  checkCollision();
 }
 
 
@@ -63,6 +67,8 @@ class Player{
   draw() {
     noStroke();
     image(playerImage, this.x, this.y, this.size, this.size);
+    noFill()
+    rect(this.x+5, this.y + this.size - 3,this.size-20,1)
   }
   
   update(){
@@ -100,9 +106,10 @@ class Platform {
   setUp(){
     for (let i = 0; i < numPlatforms; i++)
     {
-      platforms.push(new Platform());
+      newPlatformPosition = spacing * i
+      newPlatform = new Platform(newPlatformPosition)
+      platforms.push(newPlatform)
     }  
-    
   }
   
   show()
@@ -119,6 +126,18 @@ class Platform {
 }
 
 
+function checkCollision()
+{
+  for (let i = 0; i < platforms.length; i++)
+    {
+    hit = collideRectRect(player1.x, player1.y , player1.size, player1.size,
+                          platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);  
+    }
+  if (hit)
+    {
+      player1.y -= 20;
+    }
+}
 
 function keyDown() {
   
