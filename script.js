@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown,
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement;
 let platforms = [];
 
 const numPlatforms = 10;
@@ -102,18 +102,17 @@ class Platform {
     this.spacing = height / numPlatforms
 }
   
-  show()
-  {
+  show(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
   }
   
-  update()
-  {
-   // this.y += this.speed
+  update(){
+    this.y += yMovement
     if(this.y > height){
       platforms.pop()
       newPlatform = new Platform(0)
+      platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
     }
   }
   
