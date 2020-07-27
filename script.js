@@ -9,10 +9,11 @@
 let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars;
 let platforms = [];
 
-const numPlatforms = 10;
+const numPlatforms = 10, numStars = 30
 
 function preload(){
   playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
+  starImage = loadImage("")
 }
 
 function setup() {
@@ -22,6 +23,7 @@ function setup() {
   player1 = new Player()
   vel = 2
   score = 0
+  stars = []
   spacing = height / numPlatforms
   yMovement = 2
   startGame = false
@@ -33,6 +35,14 @@ function setup() {
   text('Doodle Jump', 65, 300)
   textSize(20);
   text('Press "s" to play.', 120, 330)
+  
+  for (let i = 0; i < numStars; i++) {
+    stars.push(new Star());
+  }
+  for (let j = 0; j < stars.length; j++) {
+    stars[j].draw()
+  }
+  
 }
 
 function draw() {
@@ -174,8 +184,16 @@ function drawPlatforms(){
   }
 
 class Star{
-  constructor{
-    
+  constructor(){
+      this.x = random(width)
+      this.y = random(height)
+      this.size = random(5,15)
+  }
+  
+  draw(){
+    noStroke()
+    fill(55, 100, 75, 0.2)
+    ellipse(this.x, this.y, this.size)
   }
   
 }
