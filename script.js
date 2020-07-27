@@ -31,7 +31,7 @@ function draw() {
   if (frameCount % 10 == 0){
      score++
   }
- 
+  
   keyDown();
   background(230,70,80);
   displayScore()
@@ -40,10 +40,9 @@ function draw() {
   
   if (frameCount % 60 == 0)
     {
-      platforms.push(new Platform());
-      platforms.push(new Platform());
-      platforms.push(new Platform());
-    }
+      setUpPlatforms()
+    } 
+  
   for (let i = 0; i < platforms.length; i++)
     {
       platforms[i].show();
@@ -95,22 +94,13 @@ class Player{
 
 class Platform {
   constructor(y) {
-    this.x = random(50,width-50);
+    this.x = random(0,width-50);
     this.y = y
     this.width = 50;  
     this.height = 5;
     this.speed = 2;
     this.spacing = height / numPlatforms
 }
-  
-  setUp(){
-    for (let i = 0; i < numPlatforms; i++)
-    {
-      newPlatformPosition = spacing * i
-      newPlatform = new Platform(newPlatformPosition)
-      platforms.push(newPlatform)
-    }  
-  }
   
   show()
   {
@@ -120,7 +110,11 @@ class Platform {
   
   update()
   {
-    this.y += this.speed
+   // this.y += this.speed
+    if(this.y > height){
+      platforms.pop()
+      newPlatform = new Platform(0)
+    }
   }
   
 }
@@ -153,3 +147,12 @@ function displayScore() {
   fill(0);
   text(`Score: ${score}`, 10, 20);
 }
+
+function setUpPlatforms(){
+    for (let i = 0; i < numPlatforms; i++)
+    {
+      newPlatformPosition = spacing * i
+      newPlatform = new Platform(newPlatformPosition)
+      platforms.push(newPlatform)
+    }  
+  }
