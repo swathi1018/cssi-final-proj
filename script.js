@@ -6,14 +6,14 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars, starImage
 let platforms = [];
 
-const numPlatforms = 10, numStars = 30
+const numPlatforms = 10, numStars = 50
 
 function preload(){
   playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
-  starImage = loadImage("")
+  starImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fstar.png?v=1595890888658")
 }
 
 function setup() {
@@ -27,6 +27,12 @@ function setup() {
   spacing = height / numPlatforms
   yMovement = 2
   startGame = false
+  for (let i = 0; i < numStars; i++) {
+    stars.push(new Star());
+  }
+  for (let j = 0; j < stars.length; j++) {
+    stars[j].draw()
+  }
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
@@ -36,23 +42,21 @@ function setup() {
   textSize(20);
   text('Press "s" to play.', 120, 330)
   
-  for (let i = 0; i < numStars; i++) {
-    stars.push(new Star());
-  }
-  for (let j = 0; j < stars.length; j++) {
-    stars[j].draw()
-  }
+  
   
 }
 
 function draw() {
  if(startGame){
+   background(230,70,50);
+   for (let j = 0; j < stars.length; j++) {
+    stars[j].draw()
+  }
   if (frameCount % 10 == 0){
      score++
   }
   
   keyDown();
-  background(230,70,50);
   displayScore()
   player1.draw()
   player1.update();
@@ -187,13 +191,12 @@ class Star{
   constructor(){
       this.x = random(width)
       this.y = random(height)
-      this.size = random(5,15)
+      this.size = random(5,10)
   }
   
   draw(){
     noStroke()
-    fill(55, 100, 75, 0.2)
-    ellipse(this.x, this.y, this.size)
+    image(starImage, this.x, this.y, this.size, this.size);
   }
   
 }
