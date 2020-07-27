@@ -8,6 +8,8 @@
 let playerImage, player1, vel;
 let platforms = [];
 
+const plat
+
 function setup() {
   // Canvas & color settings
   createCanvas(400, 600);
@@ -16,12 +18,20 @@ function setup() {
   player1 = new Player()
   vel = 2
   
+  platforms.push(new Platform());
+  
 }
 
 function draw() {
+  keyDown();
   background(230,70,80);
   player1.draw()
  // player1.update();
+  
+  for (let i = 0; i < platforms.length; i++)
+    {
+      platforms[i].show();
+    }
 }
 
 
@@ -57,41 +67,24 @@ class Platform {
   constructor() {
     this.x = random(width);
     this.y = random(height);
-    this.width = 20;  
-    this.height = 10;
-    this.speed = 5;
+    this.width = 50;  
+    this.height = 5;
 }
   
   show()
   {
     fill(255);
-    rect(this.x, this.y, this.x + this.width, this.y + this.height);
+    rect(this.x, this.y, this.width, this.height);
   }
   
-  update()
-  {
-    this.y += this.speed;
-  }
 }
-
-/*function keyPressed()
-{
-  if (keyCode === LEFT_ARROW)
-    {
-      player1.x -= 20;
-    }
-  else if (keyCode === RIGHT_ARROW)
-    {
-      player1.x += 20;
-    } 
-}*/
 
 function keyDown() {
   
   if (keyIsDown(LEFT_ARROW)) {
-    player1.x -= vel;
+    player1.x -= 2;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    player1.x += vel;
+    player1.x += 2;
   }
 }
