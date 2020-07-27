@@ -26,8 +26,13 @@ function setup() {
 }
 
 function draw() {
+  if (frameCount % 10 == 0){
+     score++
+  }
+ 
   keyDown();
   background(230,70,80);
+  displayScore()
   player1.draw()
   player1.update();
   
@@ -112,4 +117,10 @@ function keyDown() {
   else if (keyIsDown(RIGHT_ARROW)) {
     player1.x += 2;
   }
+}
+
+
+function displayScore() {
+  fill(0);
+  text(`Score: ${score}`, 10, 20);
 }
