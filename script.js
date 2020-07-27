@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown,
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p;
 let platforms = [];
 
 const numPlatforms = 10;
@@ -19,7 +19,8 @@ function setup() {
   player1 = new Player()
   vel = 2
   score = 0
- spacing = height / numPlatforms
+  spacing = height / numPlatforms
+  yMovement = 2
   
   /*for (let i = 0; i < numPlatforms; i++)
     {
@@ -102,20 +103,6 @@ class Platform {
     this.spacing = height / numPlatforms
 }
   
-  show(){
-    fill(255);
-    rect(this.x, this.y, this.width, this.height);
-  }
-  
-  update(){
-    this.y += yMovement
-    if(this.y > height){
-      platforms.pop()
-      newPlatform = new Platform(0)
-      platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
-    }
-  }
-  
 }
 
 
@@ -155,3 +142,20 @@ function setUpPlatforms(){
       platforms.push(newPlatform)
     }  
   }
+
+function drawPlatforms(){
+  fill(255);
+  rect(this.x, this.y, this.width, this.height);
+  
+  for p in platforms{
+    this.y += yMovement
+ 
+  if(this.y > height){
+    platforms.pop()
+    newPlatform = new Platform(0)
+    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
+  }
+    
+  }
+  
+}
