@@ -21,11 +21,6 @@ function setup() {
   score = 0
   spacing = height / numPlatforms
   yMovement = 2
-  
-  /*for (let i = 0; i < numPlatforms; i++)
-    {
-      platforms.push(new Platform());
-    }  */
 }
 
 function draw() {
@@ -39,10 +34,10 @@ function draw() {
   player1.draw()
   player1.update();
   
-  if (frameCount % 60 == 0)
-    {
+  
       setUpPlatforms()
-    } 
+      drawPlatforms()
+  
   
   for (let i = 0; i < platforms.length; i++)
     {
@@ -100,7 +95,8 @@ class Platform {
     this.width = 50;  
     this.height = 5;
     this.speed = 2;
-    this.spacing = height / numPlatforms
+    fill(255);
+    rect(this.x, this.y, this.width, this.height);
 }
   
 }
@@ -129,6 +125,16 @@ function keyDown() {
   }
 }
 
+function keyPressed() {
+  
+  if (keyCode === 83) {
+    gameOver = 
+  }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    player1.x += 2;
+  }
+}
+
 function displayScore() {
   fill(0);
   text(`Score: ${score}`, 10, 20);
@@ -144,11 +150,9 @@ function setUpPlatforms(){
   }
 
 function drawPlatforms(){
-  fill(255);
-  rect(this.x, this.y, this.width, this.height);
-  
-  for p in platforms{
     this.y += yMovement
+    fill(255);
+    rect(this.x, this.y, this.width, this.height);
  
   if(this.y > height){
     platforms.pop()
@@ -158,4 +162,3 @@ function drawPlatforms(){
     
   }
   
-}
