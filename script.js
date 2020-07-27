@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown,
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p;
+let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame;
 let platforms = [];
 
 const numPlatforms = 10;
@@ -21,6 +21,7 @@ function setup() {
   score = 0
   spacing = height / numPlatforms
   yMovement = 2
+  startGame = false
 }
 
 function draw() {
