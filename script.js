@@ -41,9 +41,6 @@ function setup() {
   text('Doodle Jump', 65, 300)
   textSize(20);
   text('Press "s" to play.', 120, 330)
-  
-  
-  
 }
 
 function draw() {
@@ -62,8 +59,8 @@ function draw() {
   player1.update();
   
   
-     // setUpPlatforms()
-      //drawPlatforms()
+     
+  drawPlatforms()
   
   
  /* for (let i = 0; i < platforms.length; i++)
