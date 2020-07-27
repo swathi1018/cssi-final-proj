@@ -16,3 +16,12 @@ function draw() {
   
 }
 
+
+function Player(){
+  
+}
+
+function Platform(){
+  
+  
+}
