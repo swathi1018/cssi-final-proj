@@ -36,10 +36,10 @@ function setup() {
     stars[j].draw()
   }
   
- for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
+ /*for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
     platforms.push(new Platform(space))
     space -= 20
-  }
+  }*/
   
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
@@ -153,12 +153,13 @@ function checkCollision()
 {
   for (let i = 0; i < platforms.length; i++)
     {
-    hit = collideRectRect(player1.x, player1.y , player1.size, player1.size, platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);  
+    hit = collideRectRect(player1.x+5, player1.y+this.size-3 , player1.size-20, 1, 
+                          platforms[i].x, platforms[i].y, platforms[i].width, 1);  
     }
-  if (hit)
+  /*if (hit && )
     {
       player1.y -= 20;
-    }
+    } */
 }
 
 function keyDown() {
