@@ -59,7 +59,7 @@ function draw() {
    
    
   player1.draw()
-  player1.update()
+  player1.move()
   drawPlatforms()
   checkCollision()
 }
@@ -93,15 +93,15 @@ class Player{
     rect(this.x+5, this.y + this.size - 3,this.size-20,1)
   }
   
-  update(){
-   /* this.velocity += this.gravity
+  move(){
+    this.velocity += this.gravity
     this.velocity *= 0.9
     this.y += this.velocity
     
-    if(this.y >= height){
-      this.y = height - 100
+    if(this.y + this.size >= height){
+      this.y = 0
       this.velocity = 0;
-     } */
+     }
     
     if(this.x < 0){
       this.x = width
@@ -110,9 +110,8 @@ class Player{
     if(this.x > width){
       this.x = 0
     }
-    
-  
   }
+  
   }
 
 class Platform {
@@ -156,6 +155,7 @@ function keyPressed() {
   
   if (keyCode === 83) {
     startGame = true
+    setUpPlatforms()
   }
 }
 
@@ -185,6 +185,15 @@ function drawPlatforms(){
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
   }
   }
+
+function moveScreenUp(){
+  if(player1.y < 250){
+    yMovement = 4
+  }
+  else{
+    yMovement = 0
+  }
+}
 
 class Star{
   constructor(){
