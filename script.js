@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement, hit,
+let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
     p, startGame, stars, starImage, gameOver, platforms;
 
 const numPlatforms = 5, numStars = 50
@@ -69,11 +69,11 @@ function draw() {
   keyDown()
   displayScore()
    
-  checkCollision()
+  // checkCollision()
   player1.draw()
   player1.move()
   //drawPlatforms()
-  //checkCollision()
+  checkCollision()
   moveScreenUp()
 }
 
@@ -100,9 +100,9 @@ class Player{
   }
 
   draw() {
-    noStroke();
+    // noStroke();
     image(playerImage, this.x, this.y, this.size, this.size);
-    noFill()
+    fill(0,100,100)
     rect(this.x+5, this.y + this.size - 3,this.size-20,1)
   }
   
@@ -153,16 +153,14 @@ class Platform {
 function checkCollision()
 {
   for (let i = 0; i < platforms.length; i++)
-    {
-    hit = collideRectRect(player1.x+5, player1.y+ player1.size-3 , player1.size-20, 1, 
-                          platforms[i].x, platforms[i].y, platforms[i].width, 1);  
-    console.log(hit)
+  {
+    let hit = collideRectRect(player1.x+5, player1.y+ player1.size-3 , player1.size-20, 1, platforms[i].x, platforms[i].y, platforms[i].width, 1);
+    console.log(hit)                  
     if (hit)
     {
       player1.y -= 250;
     }
-      hit = false;
-    }
+  }
 }
 
 function keyDown() {
