@@ -7,7 +7,7 @@
           noFill, collideRectRect */  
 
 let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
-    p, startGame, stars, starImage, gameOver, platforms;
+    p, startGame, stars, starImage, gameOver, platforms, platformCounter;
 
 const numPlatforms = 5, numStars = 50
 
@@ -22,6 +22,7 @@ function setup() {
   background(230,70,50);
   player1 = new Player()
   vel = 2
+  //platformCounter =0
   space = height - 50
   score = 0
   stars = []
@@ -145,10 +146,15 @@ class Platform {
     fill(255);
     rect(this.x, this.y, this.width, this.height);
     
-    if(this.y > height){
+    if(platformCounter % 5 ==0){
+      space = height - 50
+    }
+    if (this.y > height){
     platforms.pop()
-    newPlatform = new Platform(0)
+    newPlatform = new Platform(space)
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
+    platformCounter+=1
+    space -= 90
   }
   }
   
@@ -200,10 +206,10 @@ function moveScreenUp(){
     yMovement = 0
   }
   
-  // for (let i = 0; i < platforms.length; i++)
-  //   {
-  //     platforms[i].y -= yMovement;
-  //   }
+  for (let i = 0; i < platforms.length; i++)
+    {
+      platforms[i].y += yMovement;
+    }
 }
 
 class Star{
@@ -218,5 +224,13 @@ class Star{
     image(starImage, this.x, this.y, this.size, this.size);
   }
   
+}
+
+function setUpPlatforms(){
+  space = height - 50
+  for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
+     platforms.push(new Platform(space))
+     space -= 90
+   }
 }
   
