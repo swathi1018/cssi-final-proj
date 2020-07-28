@@ -73,7 +73,7 @@ function draw() {
   player1.move()
   //drawPlatforms()
   checkCollision()
-  // moveScreenUp()
+  moveScreenUp()
 }
 
   if(gameOver){
@@ -172,10 +172,10 @@ function checkCollision()
 function keyDown() {
   
   if (keyIsDown(LEFT_ARROW)) {
-    player1.x -= 2;
+    player1.x -= 3;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    player1.x += 2;
+    player1.x += 3;
   }
 }
 
@@ -199,6 +199,11 @@ function moveScreenUp(){
   else{
     yMovement = 0
   }
+  
+  // for (let i = 0; i < platforms.length; i++)
+  //   {
+  //     platforms[i].y -= yMovement;
+  //   }
 }
 
 class Star{
