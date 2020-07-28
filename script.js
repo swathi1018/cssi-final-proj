@@ -22,7 +22,7 @@ function setup() {
   background(230,70,50);
   player1 = new Player()
   vel = 2
-  space = height
+  space = height - 50
   score = 0
   stars = []
   platforms = [];
@@ -36,10 +36,10 @@ function setup() {
     stars[j].draw()
   }
   
- /*for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
-    platforms.push(new Platform(space))
-    space -= 20
-  }*/
+ for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
+     platforms.push(new Platform(space))
+     space -= 50
+   }
   
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
@@ -59,7 +59,7 @@ function draw() {
    
    for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
    
-   for(let k = 0; k = platforms.length; k++){
+   for(let k = 0; k < platforms.length; k++){
     platforms[k].create()
   }
    
@@ -70,7 +70,7 @@ function draw() {
    
    
   player1.draw()
-  //player1.move()
+  player1.move()
   //drawPlatforms()
   checkCollision()
   //moveScreenUp()
@@ -156,10 +156,10 @@ function checkCollision()
     hit = collideRectRect(player1.x+5, player1.y+this.size-3 , player1.size-20, 1, 
                           platforms[i].x, platforms[i].y, platforms[i].width, 1);  
     }
-  /*if (hit && )
+  if (hit)
     {
       player1.y -= 20;
-    } */
+    } 
 }
 
 function keyDown() {
