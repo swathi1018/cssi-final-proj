@@ -34,6 +34,10 @@ function setup() {
   for (let j = 0; j < stars.length; j++) {
     stars[j].draw()
   }
+  for(let k = 0; k = numPlatforms; k++){
+    platforms.push(new Platform(spacing))
+    spacing += 5
+  }
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
