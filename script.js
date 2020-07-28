@@ -24,7 +24,7 @@ function setup() {
   vel = 2
   score = 0
   stars = []
-  spacing = height / numPlatforms
+  spacing = 20
   yMovement = 2
   startGame = false
   gameOver = false
@@ -36,7 +36,7 @@ function setup() {
   }
   for(let k = 0; k = numPlatforms; k++){
     platforms.push(new Platform(spacing))
-    spacing += 5
+    spacing += 50
   }
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
@@ -55,6 +55,10 @@ function draw() {
    keyDown()
    
    for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
+   
+   for(let k = 0; k = numPlatforms; k++){
+    platforms[k].draw()
+  }
    
   if (frameCount % 10 == 0){ score++ } //increases score
   
@@ -126,9 +130,17 @@ class Platform {
     this.width = 50;  
     this.height = 5;
     this.speed = 2;
+}
+  draw(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
-}
+    if(this.y > height){
+    platforms.pop()
+    newPlatform = new Platform(0)
+    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
+  }
+  }
+  
   
 }
 
@@ -159,7 +171,7 @@ function keyPressed() {
   
   if (keyCode === 83) {
     startGame = true
-    setUpPlatforms()
+    //setUpPlatforms()
   }
 }
 
@@ -169,16 +181,16 @@ function displayScore() {
   text(`Score: ${score}`, 10, 20);
 }
 
-function setUpPlatforms(){
+/*function setUpPlatforms(){
     for (let i = 0; i < numPlatforms; i++)
     {
       newPlatformPosition = spacing * i
       newPlatform = new Platform(newPlatformPosition)
       platforms.push(newPlatform)
     }  
-  }
+  } */
 
-function drawPlatforms(){
+/*function drawPlatforms(){
     this.y += yMovement
     fill(255);
     rect(this.x, this.y, this.width, this.height);
@@ -188,7 +200,7 @@ function drawPlatforms(){
     newPlatform = new Platform(0)
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
   }
-  }
+  }*/
 
 function moveScreenUp(){
   if(player1.y < 250){
