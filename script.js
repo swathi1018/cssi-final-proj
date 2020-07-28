@@ -69,7 +69,6 @@ function draw() {
   keyDown()
   displayScore()
    
-  // checkCollision()
   player1.draw()
   player1.move()
   //drawPlatforms()
@@ -94,7 +93,7 @@ class Player{
     this.x = 200;
     this.y = 200;
     this.size = 40;
-    this.gravity = 0.9
+    this.gravity = 0.1
     this.lift = -16
     this.velocity = 0
   }
@@ -154,11 +153,11 @@ function checkCollision()
 {
   for (let i = 0; i < platforms.length; i++)
   {
-    let hit = collideRectRect(player1.x, player1.y , player1.size, 5, platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
+    let hit = collideRectRect(player1.x+5, player1.y + player1.size - 3, player1.size-20, 5, platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     console.log(hit)                  
     if (hit)
     {
-      player1.y -= 250;
+      player1.y -= player1.gravity;
     }
   }
 }
