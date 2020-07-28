@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, space, newPlatform, yMovement, 
+let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement, hit,
     p, startGame, stars, starImage, gameOver, platforms;
 
 const numPlatforms = 5, numStars = 50
@@ -28,6 +28,7 @@ function setup() {
   platforms = [];
   yMovement = 2
   startGame = false
+  //hit = false
   gameOver = false
   for (let i = 0; i < numStars; i++) {
     stars.push(new Star());
@@ -38,7 +39,7 @@ function setup() {
   
  for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
      platforms.push(new Platform(space))
-     space -= 50
+     space -= 90
    }
   
   image(playerImage, 160, 350, 100, 100);
@@ -68,12 +69,12 @@ function draw() {
   keyDown()
   displayScore()
    
-   
+  checkCollision()
   player1.draw()
   player1.move()
   //drawPlatforms()
-  checkCollision()
-  //moveScreenUp()
+  //checkCollision()
+  moveScreenUp()
 }
 
   if(gameOver){
@@ -153,13 +154,15 @@ function checkCollision()
 {
   for (let i = 0; i < platforms.length; i++)
     {
-    hit = collideRectRect(player1.x+5, player1.y+this.size-3 , player1.size-20, 1, 
+    hit = collideRectRect(player1.x+5, player1.y+ player1.size-3 , player1.size-20, 1, 
                           platforms[i].x, platforms[i].y, platforms[i].width, 1);  
-    }
-  if (hit)
+    console.log(hit)
+    if (hit)
     {
-      player1.y -= 20;
-    } 
+      player1.y -= 250;
+    }
+      hit = false;
+    }
 }
 
 function keyDown() {
