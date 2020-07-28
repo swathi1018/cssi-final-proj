@@ -6,8 +6,8 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, space, newPlatform, yMovement, p, startGame, stars, starImage, gameOver
-let platforms = [];
+let playerImage, player1, vel, score, newPlatformPosition, hit, space, newPlatform, yMovement, 
+    p, startGame, stars, starImage, gameOver, platforms;
 
 const numPlatforms = 5, numStars = 50
 
@@ -22,8 +22,10 @@ function setup() {
   background(230,70,50);
   player1 = new Player()
   vel = 2
+  space = height
   score = 0
   stars = []
+  platforms = [];
   yMovement = 2
   startGame = false
   gameOver = false
@@ -33,9 +35,12 @@ function setup() {
   for (let j = 0; j < stars.length; j++) {
     stars[j].draw()
   }
-  /*for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
+  
+ for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
     platforms.push(new Platform(space))
-  }*/
+    space -= 20
+  }
+  
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
