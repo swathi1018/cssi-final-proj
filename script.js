@@ -74,7 +74,7 @@ function draw() {
   player1.move()
   //drawPlatforms()
   checkCollision()
-  moveScreenUp()
+  // moveScreenUp()
 }
 
   if(gameOver){
@@ -103,7 +103,7 @@ class Player{
     // noStroke();
     image(playerImage, this.x, this.y, this.size, this.size);
     fill(0,100,100)
-    rect(this.x+5, this.y + this.size - 3,this.size-20,1)
+    rect(this.x+5, this.y + this.size - 3,this.size-20,5)
   }
   
   move(){
@@ -154,7 +154,7 @@ function checkCollision()
 {
   for (let i = 0; i < platforms.length; i++)
   {
-    let hit = collideRectRect(player1.x+5, player1.y+ player1.size-3 , player1.size-20, 1, platforms[i].x, platforms[i].y, platforms[i].width, 1);
+    let hit = collideRectRect(player1.x, player1.y , player1.size, 5, platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     console.log(hit)                  
     if (hit)
     {
