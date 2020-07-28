@@ -6,7 +6,7 @@
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
-let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars, starImage, gameOver
+let playerImage, player1, vel, score, newPlatformPosition, hit, space, newPlatform, yMovement, p, startGame, stars, starImage, gameOver
 let platforms = [];
 
 const numPlatforms = 5, numStars = 50
@@ -33,10 +33,9 @@ function setup() {
   for (let j = 0; j < stars.length; j++) {
     stars[j].draw()
   }
-  /*for(let k = 0; k = numPlatforms; k++){
-    platforms.push(new Platform(spacing))
-    
-  } */
+  /*for(let k = 0; k = numPlatforms; k++){   //this for loop makes the code crash idk why
+    platforms.push(new Platform(space))
+  }*/
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
@@ -123,9 +122,9 @@ class Player{
   }
 
 class Platform {
-  constructor(y) {
+  constructor(space) {
     this.x = random(0,width-50);
-    this.y = y
+    this.y = space
     this.width = 50;  
     this.height = 5;
     this.speed = 2;
@@ -171,7 +170,6 @@ function keyPressed() {
   
   if (keyCode === 83) {
     startGame = true
-    //setUpPlatforms()
   }
 }
 
@@ -180,27 +178,6 @@ function displayScore() {
   textSize(20);
   text(`Score: ${score}`, 10, 20);
 }
-
-/*function setUpPlatforms(){
-    for (let i = 0; i < numPlatforms; i++)
-    {
-      newPlatformPosition = spacing * i
-      newPlatform = new Platform(newPlatformPosition)
-      platforms.push(newPlatform)
-    }  
-  } */
-
-/*function drawPlatforms(){
-    this.y += yMovement
-    fill(255);
-    rect(this.x, this.y, this.width, this.height);
- 
-  if(this.y > height){
-    platforms.pop()
-    newPlatform = new Platform(0)
-    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
-  }
-  }*/
 
 function moveScreenUp(){
   if(player1.y < 250){
