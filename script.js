@@ -9,7 +9,7 @@
 let playerImage, player1, vel, score, newPlatformPosition, hit, spacing, newPlatform, yMovement, p, startGame, stars, starImage, gameOver
 let platforms = [];
 
-const numPlatforms = 10, numStars = 50
+const numPlatforms = 5, numStars = 50
 
 function preload(){
   playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
@@ -24,7 +24,6 @@ function setup() {
   vel = 2
   score = 0
   stars = []
-  spacing = 20
   yMovement = 2
   startGame = false
   gameOver = false
@@ -34,10 +33,10 @@ function setup() {
   for (let j = 0; j < stars.length; j++) {
     stars[j].draw()
   }
-  for(let k = 0; k = numPlatforms; k++){
+  /*for(let k = 0; k = numPlatforms; k++){
     platforms.push(new Platform(spacing))
-    spacing += 50
-  }
+    
+  } */
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
@@ -56,8 +55,8 @@ function draw() {
    
    for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
    
-   for(let k = 0; k = numPlatforms; k++){
-    platforms[k].draw()
+   for(let k = 0; k = platforms.length; k++){
+    platforms[k].create()
   }
    
   if (frameCount % 10 == 0){ score++ } //increases score
@@ -68,9 +67,9 @@ function draw() {
    
   player1.draw()
   //player1.move()
-  drawPlatforms()
+  //drawPlatforms()
   checkCollision()
-  moveScreenUp()
+  //moveScreenUp()
 }
 
   if(gameOver){
@@ -131,9 +130,10 @@ class Platform {
     this.height = 5;
     this.speed = 2;
 }
-  draw(){
+  create(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
+    
     if(this.y > height){
     platforms.pop()
     newPlatform = new Platform(0)
