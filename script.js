@@ -93,8 +93,9 @@ class Player{
     this.x = 200;
     this.y = 200;
     this.size = 40;
-    this.gravity = 0.1
-    this.lift = -16
+    this.gravity = 0.7
+    this.lift = -30
+    this.liftMult = 0.9
     this.velocity = 0
   }
 
@@ -102,6 +103,7 @@ class Player{
     // noStroke();
     image(playerImage, this.x, this.y, this.size, this.size);
     fill(0,100,100)
+    noFill()
     rect(this.x+5, this.y + this.size - 3,this.size-20,5)
   }
   
@@ -122,8 +124,13 @@ class Player{
     if(this.x > width){
       this.x = 0
     }
+    
   }
-  
+  up(){
+    this.velocity += this.lift
+    this.velocity *= this.liftMult
+    this.y += this.velocity
+  }
   }
 
 class Platform {
@@ -157,7 +164,7 @@ function checkCollision()
     console.log(hit)                  
     if (hit)
     {
-      player1.y -= player1.gravity;
+      player1.up() 
     }
   }
 }
