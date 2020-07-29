@@ -9,7 +9,7 @@
 let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
     p, startGame, stars, starImage, gameOver, platforms, platformCounter;
 
-const numPlatforms = 8, numStars = 50
+const numPlatforms = 1000, numStars = 50
 
 function preload(){
   playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
@@ -23,7 +23,7 @@ function setup() {
   player1 = new Player()
   vel = 2
   //platformCounter = 0
-  space = 20
+  space = height / numPlatforms;
   score = 0
   stars = []
   platforms = [];
@@ -63,13 +63,18 @@ function draw() {
    
    for(let k = 0; k < platforms.length; k++){
     platforms[k].create()
-  for(let k = 0; k < platforms.length; k++)
-    if (platforms[k].y > height){
-    platforms.pop()
-    newPlatform = new Platform((height/platforms.length) + k*space)
-    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
-    platformCounter+=1
-  }
+     
+    // setUpPlatforms();
+    // drawPlatforms();
+       /* for(let l = 0; l < platforms.length; l++){
+          if (platforms[l].y > height){
+          platforms.pop()
+          newPlatform = new Platform((height/platforms.length) + l*space)
+          platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
+          platformCounter+=1
+          }
+        }*/
+    
   }
    
   if (frameCount % 10 == 0){ score++ } //increases score
@@ -226,7 +231,6 @@ class Star{
 }
 
 function setUpPlatforms(){
-  space = height / numPlatforms
   for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
      platforms.push(new Platform(k * space))
    }
@@ -234,6 +238,15 @@ function setUpPlatforms(){
 
 function drawPlatforms()
 {
-  
+  for (let i = 0; i < platforms.length; i++)
+    {
+      platforms[i].y += yMovement;
+      
+      if (platforms[i].y > height)
+        {
+          platforms.pop();
+          platforms.unshift(new Platform(0));
+        }
+    }
 }
   
