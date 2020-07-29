@@ -22,7 +22,7 @@ function setup() {
   background(230,70,50);
   player1 = new Player()
   vel = 2
-  platformCounter = 0
+  //platformCounter = 0
   space = height - 50
   score = 0
   stars = []
@@ -38,7 +38,7 @@ function setup() {
     stars[j].draw()
   }
   
- for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
+ for(let k = 0; k < numPlatforms; k++){   
      platforms.push(new Platform(space))
      space -= 90
    }
@@ -63,16 +63,24 @@ function draw() {
    
    for(let k = 0; k < platforms.length; k++){
     platforms[k].create()
+    if (platforms[k].y > height){
+    platforms.pop()
+    newPlatform = new Platform(space)
+    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
+    platformCounter+=1
+    space -= 80
+  }
   }
    
   if (frameCount % 10 == 0){ score++ } //increases score
   
+  
+   
   keyDown()
   displayScore()
    
   player1.draw()
   player1.move()
-  //drawPlatforms()
   checkCollision()
   moveScreenUp()
 }
@@ -145,17 +153,7 @@ class Platform {
   create(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
-    
-    if(platformCounter % 5 ==0){
-      space = 0
-    }
-    if (this.y > height){
-    platforms.pop()
-    newPlatform = new Platform(space)
-    platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
-    platformCounter+=1
-    space -= 80
-  }
+
   }
   
   
