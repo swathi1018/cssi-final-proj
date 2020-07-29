@@ -22,7 +22,7 @@ function setup() {
   background(230,70,50);
   player1 = new Player()
   vel = 2
-  //platformCounter =0
+  platformCounter = 0
   space = height - 50
   score = 0
   stars = []
@@ -147,14 +147,14 @@ class Platform {
     rect(this.x, this.y, this.width, this.height);
     
     if(platformCounter % 5 ==0){
-      space = height - 50
+      space = 0
     }
     if (this.y > height){
     platforms.pop()
     newPlatform = new Platform(space)
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
     platformCounter+=1
-    space -= 90
+    space -= 80
   }
   }
   
