@@ -2,12 +2,12 @@
 // Add to this list as you consult the p5.js documentation for other functions.
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, text, mouseX, mouseY, 
-          strokeWeight, collideRectCircle, keyCode, mouseX, mouseY, line, mouseIsPressed, 
+          strokeWeight, collideRectCircle, keyCode, mouseX, mouseY, line, mouseIsPressed, getItem, storeItem,
           windowWidth, windowHeight, noStroke, LEFT_ARROW, RIGHT_ARROW, frameCount, keyIsDown, textAlign, CENTER, textStyle BOLD textFont textSize
           noFill, collideRectRect */  
 
 let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
-    p, startGame, stars, starImage, gameOver, platforms, platformCounter;
+    p, startGame, stars, starImage, gameOver, platforms, platformCounter, highScore;
 
 const numPlatforms = 1000, numStars = 50
 
@@ -27,6 +27,7 @@ function setup() {
   platforms = [];
   yMovement = 2
   startGame = false
+  highScore = getItem('high score')
   gameOver = false
   for (let i = 0; i < numStars; i++) {
     stars.push(new Star());
@@ -76,7 +77,7 @@ function draw() {
     
   }
    
-  if (frameCount % 10 == 0){ score++ } //increases score
+  //if (frameCount % 10 == 0){ score++ } //increases score
   
   
    
@@ -92,6 +93,10 @@ function draw() {
 }
   if(player1.y >= height){
     startGame = false
+    if(score > highScore){
+      highScore = score
+      storeItem('high score', highScore);
+    }
     gameOverScreen()
   }
 
@@ -200,6 +205,7 @@ function moveScreenUp(){
   if(player1.y < 250){
     yMovement = 4
     player1.velocity += 0.25
+    score+=1 
   }
   else{
     yMovement = 0
@@ -254,11 +260,10 @@ function gameOverScreen(){
   fill(100);
   textSize(40);
   textFont('Georgia');
-  textSize(30);
-  text(`Score: ${score}`, 120, 260)
-  text(`High Score: ${highScore}`, 120, 210)
-  text('GAME OVER', 85, 300)
+  text('GAME OVER', 66, 300)
   textSize(20);
   text('Press "r" to restart.', 100, 330)
+  text(`Score: ${score}`, 155, 470)
+  text(`High Score: ${highScore}`, 125, 500)
   
 }
