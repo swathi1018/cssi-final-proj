@@ -9,7 +9,7 @@
 let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
     p, startGame, stars, starImage, gameOver, platforms, platformCounter;
 
-const numPlatforms = 5, numStars = 50
+const numPlatforms = 8, numStars = 50
 
 function preload(){
   playerImage = loadImage("https://cdn.glitch.com/bb52dd36-2050-4746-bc69-96e74a13122e%2Fdoodlejumpthing.png?v=1595870028038")
@@ -23,7 +23,7 @@ function setup() {
   player1 = new Player()
   vel = 2
   //platformCounter = 0
-  space = height - 50
+  space = 20
   score = 0
   stars = []
   platforms = [];
@@ -63,12 +63,12 @@ function draw() {
    
    for(let k = 0; k < platforms.length; k++){
     platforms[k].create()
+  for(let k = 0; k < platforms.length; k++)
     if (platforms[k].y > height){
     platforms.pop()
-    newPlatform = new Platform(space)
+    newPlatform = new Platform((height/platforms.length) + k*space)
     platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
     platformCounter+=1
-    space -= 80
   }
   }
    
@@ -199,6 +199,7 @@ function displayScore() {
 function moveScreenUp(){
   if(player1.y < 250){
     yMovement = 4
+    player1.velocity += 0.25
   }
   else{
     yMovement = 0
@@ -225,10 +226,14 @@ class Star{
 }
 
 function setUpPlatforms(){
-  space = height - 50
+  space = height / numPlatforms
   for(let k = 0; k < numPlatforms; k++){   //this for loop makes the code crash idk why
-     platforms.push(new Platform(space))
-     space -= 90
+     platforms.push(new Platform(k * space))
    }
+}
+
+function drawPlatforms()
+{
+  
 }
   
