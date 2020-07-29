@@ -20,16 +20,13 @@ function setup() {
   createCanvas(400, 600);
   colorMode(HSB, 360, 100, 100);
   background(230,70,50);
-  player1 = new Player()
   vel = 2
-  //platformCounter = 0
   space = height / numPlatforms;
   score = 0
   stars = []
   platforms = [];
   yMovement = 2
   startGame = false
-  //hit = false
   gameOver = false
   for (let i = 0; i < numStars; i++) {
     stars.push(new Star());
@@ -42,6 +39,8 @@ function setup() {
      platforms.push(new Platform(space))
      space -= 90
    }
+  
+  player1 = new Player(platforms[0].x, platforms[0].y- 50)
   
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
@@ -88,24 +87,21 @@ function draw() {
   player1.move()
   checkCollision()
   moveScreenUp()
+   
+  
 }
-
-  if(gameOver){
-  textStyle(BOLD);
-  fill(100);
-  textSize(40);
-  textFont('Georgia');
-  text('GAME OVER', 65, 300)
-  textSize(20);
-  text(`Score: ${score}`, 120, 330)
+  if(player1.y >= height){
+    startGame = false
+    gameOverScreen()
   }
+
 }
 
 
 class Player{
-  constructor() {
-    this.x = 200;
-    this.y = 200;
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
     this.size = 40;
     this.gravity = 0.7
     this.lift = -30
@@ -125,11 +121,6 @@ class Player{
     this.velocity += this.gravity
     this.velocity *= 0.9
     this.y += this.velocity
-    
-    if(this.y + this.size >= height){
-      this.y = 0
-      this.velocity = 0;
-     }
     
     if(this.x < 0){
       this.x = width
@@ -193,6 +184,10 @@ function keyPressed() {
   if (keyCode === 83) {
     startGame = true
   }
+  if (keyCode === 82) {
+    startGame = true
+    setup()
+  }
 }
 
 function displayScore() {
@@ -250,3 +245,20 @@ function drawPlatforms()
     }
 }
   
+function gameOverScreen(){
+  colorMode(HSB, 360, 100, 100);
+  background(10,70,50);
+  
+  image(playerImage, 160, 350, 100, 100);
+  textStyle(BOLD);
+  fill(100);
+  textSize(40);
+  textFont('Georgia');
+  textSize(30);
+  text(`Score: ${score}`, 120, 260)
+  text(`High Score: ${highScore}`, 120, 210)
+  text('GAME OVER', 85, 300)
+  textSize(20);
+  text('Press "r" to restart.', 100, 330)
+  
+}
