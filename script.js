@@ -103,6 +103,7 @@ class Player{
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    this.py = y
     this.size = 40;
     this.gravity = 0.7
     this.lift = -27
@@ -121,6 +122,7 @@ class Player{
   move(){
     this.velocity += this.gravity
     this.velocity *= 0.9
+    this.py = this.y
     this.y += this.velocity
     
     if(this.x < 0){
@@ -162,7 +164,7 @@ function checkCollision()
   {
     let hit = collideRectRect(player1.x+5, player1.y + player1.size - 3, player1.size-20, 5, platforms[i].x, platforms[i].y, platforms[i].width, platforms[i].height);
     console.log(hit)                  
-    if (hit)
+    if (hit && (player1.py < player1.y))
     {
       player1.up() 
     }
