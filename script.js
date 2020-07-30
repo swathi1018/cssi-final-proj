@@ -7,7 +7,7 @@
           noFill, collideRectRect */  
 
 let playerImage, player1, vel, score, newPlatformPosition, space, newPlatform, yMovement,
-    p, startGame, stars, starImage, gameOver, platforms, platformCounter, highScore;
+    p, startGame, stars, starImage, gameOver, platforms, platformCounter, highScore, springs;
 
 const numPlatforms = 1000, numStars = 50
 
@@ -61,21 +61,12 @@ function draw() {
    
    for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
    
-   for(let k = 0; k < platforms.length; k++){
-    platforms[k].create()
+   for(let k = 0; k < platforms.length; k++){ platforms[k].create() } //draws platforms
+   
+   if(score % 4 ==0){
      
-    // setUpPlatforms();
-    // drawPlatforms();
-       /* for(let l = 0; l < platforms.length; l++){
-          if (platforms[l].y > height){
-          platforms.pop()
-          newPlatform = new Platform((height/platforms.length) + l*space)
-          platforms.unshift(newPlatform) //unshift adds new elements to the the beginning of an array
-          platformCounter+=1
-          }
-        }*/
-    
-  }
+     
+   }
     
   keyDown()
   displayScore()
@@ -152,11 +143,24 @@ class Platform {
   create(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
+  } 
+}
+
+class Spring{
+  constructor(x,y){
+    this.x = x
+    this.y = y
+    this.width = 10
+    this.height = 5
+  }
+  
+  create(){
+    fill(27, 4, 59)
+    rect(this.x, this.y, this.width, this.height);
   }
   
   
 }
-
 
 function checkCollision()
 {
@@ -264,3 +268,4 @@ function gameOverScreen(){
   text(`High Score: ${highScore}`, 125, 500)
   
 }
+
