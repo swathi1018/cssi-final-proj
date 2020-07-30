@@ -293,8 +293,8 @@ function setUpPlatforms() {
 }
 
 function gameOverScreen() {
-  colorMode(HSB, 360, 100, 100);
-  background(10, 70, 50);
+ 
+  background(4, 8, 36);
 
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
