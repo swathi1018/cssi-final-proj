@@ -42,7 +42,7 @@ function setup() {
   createCanvas(400, 600);
   colorMode(HSB, 360, 100, 100);
   background(230, 70, 50);
-  let ml = millis(); 
+  let ml = millis();
   vel = 2;
   space = height / numPlatforms;
   score = 0;
@@ -63,7 +63,7 @@ function setup() {
   for (let k = 0; k < numPlatforms; k++) {
     platforms.push(new Platform(space));
     space -= 70;
-    if (k % 15 == 0 && k!=0) {
+    if (k % 15 == 0 && k != 0) {
       springs.push(new Spring(platforms[k].x + 5, platforms[k].y - 5));
     }
   }
@@ -87,16 +87,19 @@ function draw() {
     keyDown();
 
     for (let j = 0; j < stars.length; j++) {
-      stars[j].draw();
-    } //draws stars in background
+      stars[j].draw(); //draws stars in background
+    }
 
     for (let k = 0; k < platforms.length; k++) {
       platforms[k].create(); //draws platforms
+      if (k % 26 == 0 && k != 0) {
+        platforms[k].move();
+      }
     }
 
     for (let l = 0; l < springs.length; l++) {
       springs[l].create(); //draws springs
-      console.log(`x: ${springs[l].x} y: ${springs[l].y}`)
+      //console.log(`x: ${springs[l].x} y: ${springs[l].y}`)
     }
 
     keyDown();
@@ -130,7 +133,6 @@ class Player {
   }
 
   draw() {
-    // noStroke();
     image(playerImage, this.x, this.y, this.size, this.size);
     fill(0, 100, 100);
     noFill();
@@ -153,7 +155,6 @@ class Player {
   }
   up() {
     this.velocity += this.lift;
-    //this.velocity *= this.liftMult
     this.y += this.velocity;
   }
 }
@@ -165,10 +166,22 @@ class Platform {
     this.width = 50;
     this.height = 5;
     this.speed = 2;
+    this.vel = 2;
   }
   create() {
     fill(255);
     rect(this.x, this.y, this.width, this.height);
+  }
+
+  move() {
+    this.x += this.vel;
+    if (this.x < 0) {
+      this.x = width;
+    }
+
+    if (this.x > width) {
+      this.x = 0;
+    }
   }
 }
 
@@ -182,7 +195,7 @@ class Spring {
 
   create() {
     noStroke();
-    fill(27, 4, 50);
+    fill(125, 87, 100);
     rect(this.x, this.y, this.width, this.height);
   }
 }
@@ -202,9 +215,8 @@ function checkCollision() {
     if (hit && player1.py < player1.y) {
       player1.up();
     }
-    
   }
-  
+
   for (let j = 0; j < springs.length; j++) {
     let springHit = collideRectRect(
       player1.x + 5,
@@ -216,18 +228,16 @@ function checkCollision() {
       springs[j].width,
       springs[j].height
     );
-    
-    if(springHit && player1.py < player1.y){
-      player1.lift = -60
+
+    if (springHit && player1.py < player1.y) {
+      player1.lift = -60;
       yMovement = 100;
       player1.up();
-    }
-    else{
-      player1.lift = -27
-      yMovement = 4
+    } else {
+      player1.lift = -27;
+      yMovement = 4;
     }
   }
-  
 }
 
 function keyDown() {
@@ -249,7 +259,7 @@ function keyPressed() {
 }
 
 function displayScore() {
-  fill(0);
+  fill(125, 87, 100);
   textSize(20);
   text(`Score: ${score}`, 10, 20);
 }
@@ -266,7 +276,7 @@ function moveScreenUp() {
   for (let i = 0; i < platforms.length; i++) {
     platforms[i].y += yMovement;
   }
-  
+
   for (let j = 0; j < springs.length; j++) {
     springs[j].y += yMovement;
   }
@@ -293,9 +303,8 @@ function setUpPlatforms() {
 }
 
 function gameOverScreen() {
- 
-  background(4, 8, 36);
-
+  colorMode(HSB, 360, 100, 100);
+  background(10, 70, 100);
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
   fill(100);
@@ -307,4 +316,3 @@ function gameOverScreen() {
   text(`Score: ${score}`, 155, 470);
   text(`High Score: ${highScore}`, 125, 500);
 }
-
