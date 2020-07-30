@@ -38,7 +38,7 @@ function setup() {
   
  for(let k = 0; k < numPlatforms; k++){   
      platforms.push(new Platform(space))
-     space -= 80
+     space -= 70
    }
   
   player1 = new Player(platforms[0].x, platforms[0].y - 50)
@@ -150,7 +150,6 @@ class Platform {
   create(){
     fill(255);
     rect(this.x, this.y, this.width, this.height);
-
   }
   
   
