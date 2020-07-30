@@ -25,6 +25,7 @@ function setup() {
   score = 0
   stars = []
   platforms = [];
+  springs = []
   yMovement = 2
   startGame = false
   highScore = getItem('high score')
@@ -39,6 +40,10 @@ function setup() {
  for(let k = 0; k < numPlatforms; k++){   
      platforms.push(new Platform(space))
      space -= 70
+     /*if(k%6 ==0){
+       springs.push(new Spring(platforms[k].x + 5, platforms[k].y - 5))
+     } */
+   
    }
   
   player1 = new Player(platforms[0].x, platforms[0].y - 50)
@@ -61,12 +66,14 @@ function draw() {
    
    for (let j = 0; j < stars.length; j++) { stars[j].draw() } //draws stars in background
    
-   for(let k = 0; k < platforms.length; k++){ platforms[k].create() } //draws platforms
-   
-   if(score % 4 ==0){
-     
-     
+   for(let k = 0; k < platforms.length; k++){ 
+     platforms[k].create() //draws platforms
    }
+   
+  /* for(let l = 0; l < springs.length; l++){ 
+     springs[l].create() //draws springs
+   } */
+  
     
   keyDown()
   displayScore()
@@ -158,8 +165,6 @@ class Spring{
     fill(27, 4, 59)
     rect(this.x, this.y, this.width, this.height);
   }
-  
-  
 }
 
 function checkCollision()
