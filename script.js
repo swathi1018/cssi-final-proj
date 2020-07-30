@@ -105,7 +105,7 @@ class Player{
     this.y = y;
     this.size = 40;
     this.gravity = 0.7
-    this.lift = -30
+    this.lift = -27
     this.liftMult = 0.9
     this.velocity = 0
   }
@@ -134,7 +134,7 @@ class Player{
   }
   up(){
     this.velocity += this.lift
-    this.velocity *= this.liftMult
+    //this.velocity *= this.liftMult
     this.y += this.velocity
   }
   }
