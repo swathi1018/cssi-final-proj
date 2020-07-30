@@ -38,10 +38,10 @@ function setup() {
   
  for(let k = 0; k < numPlatforms; k++){   
      platforms.push(new Platform(space))
-     space -= 90
+     space -= 80
    }
   
-  player1 = new Player(platforms[0].x, platforms[0].y- 50)
+  player1 = new Player(platforms[0].x, platforms[0].y - 50)
   
   image(playerImage, 160, 350, 100, 100);
   textStyle(BOLD);
@@ -76,11 +76,7 @@ function draw() {
         }*/
     
   }
-   
-  //if (frameCount % 10 == 0){ score++ } //increases score
-  
-  
-   
+    
   keyDown()
   displayScore()
    
