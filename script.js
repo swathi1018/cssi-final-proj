@@ -63,6 +63,7 @@ function setup() {
   for (let k = 0; k < numPlatforms; k++) {
     platforms.push(new Platform(space));
     space -= 70;
+    
     if (k % 15 == 0 && k != 0) {
       springs.push(new Spring(platforms[k].x + 5, platforms[k].y - 5));
     }
@@ -128,7 +129,6 @@ class Player {
     this.size = 40;
     this.gravity = 0.7;
     this.lift = -27;
-    this.liftMult = 0.9;
     this.velocity = 0;
   }
 
